@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home | Commercium</title>
+<meta name="description" content="Commercium — the Commerce Club at The Westminster School, Dubai. Events, competitions, workshops, and real-world experiences for student entrepreneurs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css?v=11">
+</head>
+<body>
+<div id="header-slot"></div>
+<div class="progress-bar" id="progress-bar"></div>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <span class="hero-eyebrow">The Commerce Club · Westminster School Dubai</span>
+        <h1 id="hero-title">Welcome to <span class="hl">Commercium!</span></h1>
+        <p class="lead" id="hero-sub">Join the Commerce Club and immerse yourself in the world of business and entrepreneurship.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="membership.html">Become a Member</a>
+          <a class="btn btn-ghost" href="activities.html">See Our Activities</a>
+        </div>
+        <div class="hero-stats" id="hero-stats">
+          <div class="stat"><span class="num" data-count="0">0</span><span class="lbl">Upcoming Events</span></div>
+          <div class="stat"><span class="num" data-count="0">0</span><span class="lbl">Achievements</span></div>
+          <div class="stat"><span class="num" data-count="0">0</span><span class="lbl">Gallery Photos</span></div>
+          <div class="stat"><span class="num" data-count="0">0</span><span class="lbl">Community Posts</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>Mind Your Business <b>✦</b> Commercium <b>✦</b> Market Day <b>✦</b> Entrepreneurship <b>✦</b> Finance <b>✦</b> Innovation <b>✦</b> The Westminster School Dubai <b>✦</b></span>
+    </div>
+  </div>
+
+  <!-- NEXT EVENT SPOTLIGHT -->
+  <section class="spotlight bg-cream theme-light" id="spotlight">
+    <div class="container">
+      <div class="reveal">
+        <span class="eyebrow">Next up</span>
+        <h2 id="sp-title">What's next for the club</h2>
+        <p class="sp-loc" id="sp-loc"></p>
+        <p class="sp-desc" id="sp-desc"></p>
+        <div class="big-cd" id="sp-cd">
+          <div class="cd-box"><b>0</b><span>Days</span></div>
+          <div class="cd-box"><b>00</b><span>Hrs</span></div>
+          <div class="cd-box"><b>00</b><span>Min</span></div>
+          <div class="cd-box"><b>00</b><span>Sec</span></div>
+        </div>
+      </div>
+      <div class="spotlight-art reveal">
+        <img id="sp-img" src="assets/photos/photo-047.jpg" alt="Commercium event" loading="lazy">
+        <div class="stamp">Market Day<br>2026</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="section gallery" id="gallery">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow">The Gallery</span>
+        <h2>Moments from the Club</h2>
+        <p>Events, workshops, and everything in between — click any photo to view it up close.</p>
+      </div>
+      <div class="gallery-grid" id="gallery-grid"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section bg-teal theme-light" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-photo reveal">
+          <img src="assets/photos/photo-046.jpg" alt="Students collaborating at a Commercium event" loading="lazy">
+        </div>
+        <div class="about-copy reveal">
+          <span class="eyebrow">Who we are</span>
+          <h2 id="about-title">About <span>Commercium</span></h2>
+          <p id="about-text">Commercium is a community for students who want to explore the world of business beyond the classroom.</p>
+          <p id="about-goal"></p>
+          <ul class="about-points">
+            <li>Finance &amp; entrepreneurship</li>
+            <li>Competitions &amp; workshops</li>
+            <li>Guest speakers &amp; networking</li>
+            <li>Real-world experiences</li>
+          </ul>
+          <a class="btn btn-gold" href="achievements.html">View Our Achievements</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MASCOT -->
+  <section class="section mascot bg-orange-soft theme-light">
+    <div class="container">
+      <div class="mascot-fig reveal">
+        <img src="assets/photos/photo-043.png" alt="CeCe the Commercium mascot" loading="lazy">
+      </div>
+      <div class="mascot-copy reveal">
+        <span class="eyebrow">Meet our mascot</span>
+        <h2>Meet <span>CeCe!</span></h2>
+        <p>More than just a coin, CeCe is the heart (and a little bit of the currency) of Commercium. She believes every great venture starts with a single idea... and maybe a little courage, too.</p>
+        <p>Curious, optimistic, and always one step ahead, CeCe is on a mission to turn ideas into opportunities, questions into discoveries, and ambition into action.</p>
+        <p>After all, the best investments aren't always measured in money — they're measured in knowledge, confidence, and the people you grow with!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS PREVIEW -->
+  <section class="section bg-lavender theme-light" id="events">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow">Upcoming Events</span>
+        <h2>Something exciting is always around the corner</h2>
+      </div>
+      <div class="events-grid" id="events-grid"></div>
+      <div style="text-align:center;margin-top:44px" class="reveal">
+        <a class="btn btn-ghost" href="activities.html">See All Events</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS BAND -->
+  <section class="section bg-cream theme-light" id="achievements">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow">Trophy case</span>
+        <h2>What we've pulled off</h2>
+      </div>
+      <div class="ach-band" id="ach-band"></div>
+      <div style="text-align:center;margin-top:40px" class="reveal">
+        <a class="btn btn-gold" href="achievements.html">View All Achievements</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY JOIN -->
+  <section class="section why bg-gold theme-light">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow">Why join?</span>
+        <h2>Grow with Commercium</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card reveal"><div class="icon">🤝</div><h3>Community</h3><p>Connect with ambitious, like-minded students who share an interest in business, finance, and entrepreneurship.</p></div>
+        <div class="why-card reveal"><div class="icon">🧠</div><h3>Practical Skills</h3><p>Develop real-world skills in financial literacy, leadership, communication, and problem-solving.</p></div>
+        <div class="why-card reveal"><div class="icon">🏆</div><h3>Competitions</h3><p>Challenge yourself in business case competitions, simulations, and entrepreneurial events.</p></div>
+        <div class="why-card reveal"><div class="icon">🌐</div><h3>Networking</h3><p>Meet industry professionals, university students, and successful entrepreneurs.</p></div>
+        <div class="why-card reveal"><div class="icon">🚀</div><h3>Opportunities</h3><p>Access leadership roles and experiences that strengthen your portfolio and applications.</p></div>
+        <div class="why-card reveal"><div class="icon">💡</div><h3>Innovation</h3><p>Turn ideas into reality by exploring entrepreneurship and thinking strategically.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMUNITY VOICES -->
+  <section class="section voices" id="voices">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow">From the feed</span>
+        <h2>Voices from the Commerunity</h2>
+      </div>
+      <div class="voice-slider reveal">
+        <div class="voice-track" id="voice-track"></div>
+      </div>
+      <div class="voice-nav reveal">
+        <button id="voice-prev" aria-label="Previous quote">‹</button>
+        <div class="voice-dots" id="voice-dots"></div>
+        <button id="voice-next" aria-label="Next quote">›</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section bg-orange-soft theme-light" id="faq">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow">Good to know</span>
+        <h2>Frequently asked questions</h2>
+      </div>
+      <div class="faq-list" id="faq-list">
+        <div class="faq-item reveal">
+          <button class="faq-q">Who can join Commercium?<span class="ic">+</span></button>
+          <div class="faq-a"><p>Commercium is open to students studying commerce subjects at The Westminster School – Dubai. Registrations from students who aren't enrolled in commerce subjects won't be accepted.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q">How do I become a member?<span class="ic">+</span></button>
+          <div class="faq-a"><p>Head to the Membership Form and fill in your details — full name, Computer ID, GEMS email, year group and your commerce subjects. It takes a couple of minutes.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q">What does the club actually do?<span class="ic">+</span></button>
+          <div class="faq-a"><p>Events, competitions, workshops and real-world experiences: Market Day, negotiation and budgeting workshops, business case competitions, guest speakers and collaboration projects with partners like HW Dubai and Injaz UAE.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q">Do I need business experience to join?<span class="ic">+</span></button>
+          <div class="faq-a"><p>Not at all. Curiosity is the only requirement — the club exists to build your confidence and skills from the ground up.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q">How do I find out about upcoming events?<span class="ic">+</span></button>
+          <div class="faq-a"><p>Check the Activities page and the Notifications page for official announcements, or follow @commercium.tws on Instagram for the latest.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q">Can parents, teachers or alumni get involved?<span class="ic">+</span></button>
+          <div class="faq-a"><p>Yes — the Public Community and Alumni Network groups are open to everyone. For collaborations, sponsorship or event proposals, contact us through the form below.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <span class="eyebrow">Get in touch</span>
+          <h2>We'd <span>love</span> to hear from you</h2>
+          <p>We encourage inquiries and ideas for collaborations. Reach out to us — we'd love to hear from you!</p>
+          <div class="contact-line"><span class="ic">📧</span><a href="mailto:commerciumclubtws@gmail.com" id="contact-email">commerciumclubtws@gmail.com</a></div>
+          <div class="contact-line"><span class="ic">📷</span><a href="https://www.instagram.com/commercium.tws" target="_blank" rel="noopener">@commercium.tws</a></div>
+          <div class="contact-line"><span class="ic">🏫</span><span>The Westminster School – Dubai · Baghdad Street, School Zone</span></div>
+        </div>
+        <div class="form-card reveal">
+          <form id="contact-form">
+            <div class="row" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+              <div class="field">
+                <label for="cf-first">First Name <span class="req">*</span></label>
+                <input type="text" id="cf-first" required>
+              </div>
+              <div class="field">
+                <label for="cf-last">Last Name <span class="req">*</span></label>
+                <input type="text" id="cf-last" required>
+              </div>
+            </div>
+            <div class="field">
+              <label for="cf-email">Email Address <span class="req">*</span></label>
+              <input type="email" id="cf-email" required>
+            </div>
+            <div class="field">
+              <label for="cf-org">Organisation</label>
+              <input type="text" id="cf-org">
+            </div>
+            <div class="field">
+              <label>Inquiry Type <span class="req">*</span></label>
+              <div class="radio-group">
+                <label><input type="radio" name="cf-type" value="General Question" required> General Question</label>
+                <label><input type="radio" name="cf-type" value="Suggestion/Feedback"> Suggestion/Feedback</label>
+                <label><input type="radio" name="cf-type" value="Collaboration"> Collaboration</label>
+                <label><input type="radio" name="cf-type" value="Sponsorship"> Sponsorship</label>
+                <label><input type="radio" name="cf-type" value="Event Proposal"> Event Proposal</label>
+                <label><input type="radio" name="cf-type" value="Other"> Other</label>
+              </div>
+            </div>
+            <div class="field">
+              <label for="cf-subject">Subject <span class="req">*</span></label>
+              <input type="text" id="cf-subject" required>
+            </div>
+            <div class="field">
+              <label for="cf-message">Message <span class="req">*</span></label>
+              <textarea id="cf-message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%">Send Message</button>
+            <p class="form-note">Submitting opens your email app with your message pre-filled.</p>
+            <div class="form-success" id="cf-success">Your message is ready to send — your email app should have opened. Please press send!</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lb-close" id="lb-close" aria-label="Close">×</button>
+  <button class="lb-btn lb-prev" id="lb-prev" aria-label="Previous">‹</button>
+  <img id="lb-img" src="" alt="">
+  <button class="lb-btn lb-next" id="lb-next" aria-label="Next">›</button>
+  <div class="lb-cap" id="lb-cap"></div>
+</div>
+
+<button class="to-top" id="to-top" aria-label="Back to top">↑</button>
+
+<div id="footer-slot"></div>
+<script src="assets/js/data.js?v=5"></script>
+<script src="assets/js/ui.js?v=14"></script>
+<script>
+(function () {
+  'use strict';
+  const C = window.Commercium;
+
+  /* ---------- load dynamic content ---------- */
+  C.getData().then(function (data) {
+    const s = data.site;
+    if (s.heroTitle) {
+      document.getElementById('hero-title').innerHTML =
+        C.esc(s.heroTitle).replace(/Commercium/i, '<span class="hl">$&</span>');
+    }
+    if (s.heroSubtitle) document.getElementById('hero-sub').textContent = s.heroSubtitle;
+    if (s.aboutText) document.getElementById('about-text').textContent = s.aboutText;
+    if (s.aboutGoal) document.getElementById('about-goal').textContent = s.aboutGoal;
+    if (s.contactEmail) document.getElementById('contact-email').textContent = s.contactEmail;
+    if (s.contactEmail) document.getElementById('contact-email').href = 'mailto:' + s.contactEmail;
+
+    /* stats (real counts from data) */
+    const stats = [
+      data.events.length, data.achievements.length,
+      data.gallery.length, data.posts.length
+    ];
+    document.querySelectorAll('#hero-stats .num').forEach(function (el, i) {
+      const target = stats[i] || 0;
+      animateCount(el, target);
+    });
+
+    /* gallery */
+    const grid = document.getElementById('gallery-grid');
+    const items = data.gallery;
+    grid.innerHTML = items.map(function (g, i) {
+      return '<figure class="gallery-item reveal" data-i="' + i + '" tabindex="0" role="button" aria-label="View photo">' +
+        '<img src="' + C.esc(g.src) + '" alt="' + C.esc(g.alt || 'Commercium photo') + '" loading="lazy">' +
+        (g.caption ? '<figcaption class="cap">' + C.esc(g.caption) + '</figcaption>' : '') +
+        '</figure>';
+    }).join('');
+    initLightbox(items);
+
+    /* events preview */
+    const evGrid = document.getElementById('events-grid');
+    evGrid.innerHTML = data.events.slice(0, 3).map(eventCard).join('');
+    evGrid.querySelectorAll('.event-card').forEach(function (card) {
+      C.startCountdown(card.querySelector('.countdown'), card.dataset.date, card.dataset.time);
+    });
+
+    /* next event spotlight */
+    buildSpotlight(data);
+
+    /* achievements band */
+    const band = document.getElementById('ach-band');
+    if (band) {
+      band.innerHTML = data.achievements.slice(0, 3).map(function (a) {
+        return '<article class="ach-mini reveal' + (a.image ? ' has-img' : '') + '">' +
+          '<span class="m-year">' + C.esc(a.year || '') + '</span>' +
+          (a.image
+            ? '<div class="m-photo"><img src="' + C.esc(a.image) + '" alt="" loading="lazy"></div>'
+            : '<div class="m-icon">' + C.esc(a.icon || '🏆') + '</div>') +
+          '<p class="m-cat">' + C.esc(a.category || 'Milestone') + '</p>' +
+          '<h3>' + C.esc(a.title) + '</h3>' +
+          '<p>' + C.esc((a.description || '').slice(0, 90)) + (a.description && a.description.length > 90 ? '…' : '') + '</p>' +
+          '</article>';
+      }).join('');
+    }
+
+    /* bind tilt + reveal on freshly rendered cards */
+    C.bindTilt();
+    C.refreshReveal();
+  }).catch(function () {
+    document.getElementById('gallery-grid').innerHTML =
+      '<p style="color:var(--muted)">Could not load content. Is the server running?</p>';
+  });
+
+  function animateCount(el, target) {
+    const dur = 1100;
+    const t0 = performance.now();
+    function step(t) {
+      const p = Math.min((t - t0) / dur, 1);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function buildSpotlight(data) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const next = data.events.find(function (e) {
+      const d = new Date(e.date);
+      return !isNaN(d.getTime()) && d >= today;
+    }) || data.events[0];
+    if (!next) return;
+    document.getElementById('sp-title').innerHTML =
+      'Next up: <span>' + C.esc(next.title) + '</span>';
+    document.getElementById('sp-loc').textContent =
+      '📍 ' + (next.location || 'TBA') + ' · ' + C.formatDate(next.date, true) + (next.time ? ' · ' + next.time : '');
+    document.getElementById('sp-desc').textContent = next.description || '';
+    C.startCountdown(document.getElementById('sp-cd'), next.date, next.time);
+  }
+
+  function eventCard(e) {
+    const d = new Date(e.date + 'T' + (e.time || '18:00'));
+    const day = isNaN(d.getTime()) ? '' : d.getDate();
+    const mon = isNaN(d.getTime()) ? '' : d.toLocaleDateString('en-GB', { month: 'short' });
+    return '<article class="event-card reveal" data-date="' + C.esc(e.date) + '" data-time="' + C.esc(e.time || '') + '">' +
+      (e.image ? '<div class="card-photo"><img src="' + C.esc(e.image) + '" alt="' + C.esc(e.title) + '" loading="lazy"></div>' : '') +
+      '<div class="event-body">' +
+      '<span class="event-date"><span class="day">' + day + '</span>' + mon + '</span>' +
+      '<h3>' + C.esc(e.title) + '</h3>' +
+      '<p class="event-loc">📍 ' + C.esc(e.location || 'TBA') + ' · ' + C.esc(e.time || 'TBA') + '</p>' +
+      '<p class="desc">' + C.esc(e.description || '') + '</p>' +
+      '<div class="countdown"><div class="cd-box"><b>0</b><span>Days</span></div><div class="cd-box"><b>00</b><span>Hrs</span></div><div class="cd-box"><b>00</b><span>Min</span></div><div class="cd-box"><b>00</b><span>Sec</span></div></div>' +
+      '</div></article>';
+  }
+
+  /* ---------- community voices carousel ---------- */
+  const VOICES = [
+    { q: 'It\'s hard to believe this day started as just an idea. After months of planning, seeing everything come together was truly special. Thank you to every student, teacher, volunteer, and visitor who helped make Market Day what it was.', who: 'Market Day 2026 recap', tag: '@commercium.tws' },
+    { q: 'That\'s a wrap. Thank you to everyone who helped make this year what it was. We can\'t wait to come back with even more ideas, bigger plans, and new memories next year.', who: 'End of year message', tag: '@commercium.tws' },
+    { q: 'Our students recently participated in the Basics of Starting a Business workshop with Professor Stoyan Stoyanov of HW Dubai.', who: 'Workshop highlight', tag: '@commercium.tws' },
+    { q: 'In collaboration with Injaz UAE, Commercium introduces certified online entrepreneurship modules focused on project management and building sustainable, socially responsible businesses.', who: 'Injaz UAE partnership', tag: '@commercium.tws' },
+    { q: 'Market Day is calling. We\'re looking for open hearts and open wallets. Commercium Market Day is coming — stay ready.', who: 'Market Day hype', tag: '@commercium.tws' }
+  ];
+  (function () {
+    const track = document.getElementById('voice-track');
+    const dots = document.getElementById('voice-dots');
+    if (!track) return;
+    track.innerHTML = VOICES.map(function (v) {
+      return '<figure class="voice-slide"><div class="voice-card"><span class="mark">“</span>' +
+        '<blockquote>' + C.esc(v.q) + '</blockquote>' +
+        '<figcaption><b>' + C.esc(v.who) + '</b> · ' + C.esc(v.tag) + '</figcaption></div></figure>';
+    }).join('');
+    dots.innerHTML = VOICES.map(function (_, i) {
+      return '<button aria-label="Quote ' + (i + 1) + '"></button>';
+    }).join('');
+    const slideW = function () { return track.querySelector('.voice-slide').getBoundingClientRect().width; };
+    let cur = 0;
+    function go(i) {
+      cur = (i + VOICES.length) % VOICES.length;
+      track.style.transform = 'translateX(-' + cur * slideW() + 'px)';
+      dots.querySelectorAll('button').forEach(function (d, j) {
+        d.classList.toggle('active', j === cur);
+      });
+    }
+    document.getElementById('voice-prev').addEventListener('click', function () { go(cur - 1); });
+    document.getElementById('voice-next').addEventListener('click', function () { go(cur + 1); });
+    dots.addEventListener('click', function (ev) {
+      const b = ev.target.closest('button');
+      if (b) go([...dots.children].indexOf(b));
+    });
+    window.addEventListener('resize', function () { go(cur); });
+    let timer = setInterval(function () { go(cur + 1); }, 6000);
+    const slider = document.querySelector('.voice-slider');
+    slider.addEventListener('mouseenter', function () { clearInterval(timer); });
+    slider.addEventListener('mouseleave', function () { timer = setInterval(function () { go(cur + 1); }, 6000); });
+    go(0);
+  })();
+
+  /* ---------- FAQ accordion ---------- */
+  document.querySelectorAll('.faq-q').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      const item = btn.closest('.faq-item');
+      const open = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function (it) { it.classList.remove('open'); });
+      if (!open) item.classList.add('open');
+    });
+  });
+
+  /* ---------- scroll progress + back to top ---------- */
+  (function () {
+    const bar = document.getElementById('progress-bar');
+    const top = document.getElementById('to-top');
+    function onScroll() {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const p = max > 0 ? (window.scrollY / max) * 100 : 0;
+      bar.style.width = p + '%';
+      top.classList.toggle('show', window.scrollY > 600);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    top.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  })();
+
+  /* ---------- lightbox ---------- */
+  function initLightbox(items) {
+    const lb = document.getElementById('lightbox');
+    const img = document.getElementById('lb-img');
+    const cap = document.getElementById('lb-cap');
+    let cur = 0;
+    function show(i) {
+      cur = (i + items.length) % items.length;
+      img.src = items[cur].src;
+      img.alt = items[cur].alt || 'Commercium photo';
+      cap.textContent = items[cur].caption || items[cur].alt || '';
+    }
+    function open(i) {
+      show(i);
+      lb.classList.add('open');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      lb.classList.remove('open');
+      lb.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('gallery-grid').addEventListener('click', function (ev) {
+      const f = ev.target.closest('.gallery-item');
+      if (f) open(parseInt(f.dataset.i, 10));
+    });
+    document.getElementById('gallery-grid').addEventListener('keydown', function (ev) {
+      if (ev.key === 'Enter' && ev.target.closest('.gallery-item')) open(parseInt(ev.target.closest('.gallery-item').dataset.i, 10));
+    });
+    document.getElementById('lb-close').addEventListener('click', close);
+    document.getElementById('lb-prev').addEventListener('click', function () { show(cur - 1); });
+    document.getElementById('lb-next').addEventListener('click', function () { show(cur + 1); });
+    lb.addEventListener('click', function (ev) { if (ev.target === lb) close(); });
+    document.addEventListener('keydown', function (ev) {
+      if (!lb.classList.contains('open')) return;
+      if (ev.key === 'Escape') close();
+      if (ev.key === 'ArrowLeft') show(cur - 1);
+      if (ev.key === 'ArrowRight') show(cur + 1);
+    });
+  }
+
+  /* ---------- contact form (mailto) ---------- */
+  document.getElementById('contact-form').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    const f = ev.target;
+    const first = f['cf-first'].value.trim();
+    const last = f['cf-last'].value.trim();
+    const email = f['cf-email'].value.trim();
+    const org = f['cf-org'].value.trim();
+    const type = (f.querySelector('input[name="cf-type"]:checked') || {}).value || '';
+    const subject = f['cf-subject'].value.trim();
+    const message = f['cf-message'].value.trim();
+    const body = [
+      'Name: ' + first + ' ' + last,
+      'Email: ' + email,
+      org ? 'Organisation: ' + org : '',
+      'Inquiry Type: ' + type,
+      'Message:\n' + message
+    ].filter(Boolean).join('\n');
+    window.location.href = 'mailto:commerciumclubtws@gmail.com?subject=' +
+      encodeURIComponent('Commercium inquiry: ' + subject) + '&body=' + encodeURIComponent(body);
+    document.getElementById('cf-success').style.display = 'block';
+  });
+})();
+</script>
+</body>
+</html>

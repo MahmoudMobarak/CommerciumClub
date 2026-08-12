@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Activities | Commercium</title>
+<meta name="description" content="Upcoming events from Commercium — the Commerce Club at The Westminster School, Dubai.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css?v=11">
+</head>
+<body>
+<div id="header-slot"></div>
+
+<main>
+  <section class="page-hero t-lavender">
+    <div class="container">
+      <span class="eyebrow">What's on</span>
+      <h1>Upcoming Events</h1>
+      <p class="sub">Something exciting is always around the corner. See what's coming up — and don't miss the countdowns.</p>
+    </div>
+  </section>
+
+  <section class="section bg-lavender theme-light" style="padding-top:20px">
+    <div class="container">
+      <div class="events-grid" id="events-grid"></div>
+      <div class="empty-state" id="empty" style="display:none">
+        <div class="icon">🗓️</div>
+        <h2>No upcoming events</h2>
+        <p>Check back soon — new events are added regularly.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="footer-slot"></div>
+<script src="assets/js/data.js?v=5"></script>
+<script src="assets/js/ui.js?v=14"></script>
+<script>
+(function () {
+  'use strict';
+  const C = window.Commercium;
+  C.getData().then(function (data) {
+    const grid = document.getElementById('events-grid');
+    if (!data.events.length) { document.getElementById('empty').style.display = 'block'; return; }
+    grid.innerHTML = data.events.map(function (e) {
+      const d = new Date(e.date + 'T' + (e.time || '18:00'));
+      const day = isNaN(d.getTime()) ? '' : d.getDate();
+      const mon = isNaN(d.getTime()) ? '' : d.toLocaleDateString('en-GB', { month: 'short' });
+      return '<article class="event-card reveal" data-date="' + C.esc(e.date) + '" data-time="' + C.esc(e.time || '') + '">' +
+        (e.image ? '<div class="card-photo"><img src="' + C.esc(e.image) + '" alt="' + C.esc(e.title) + '" loading="lazy"></div>' : '') +
+        '<div class="event-body">' +
+        '<span class="event-date"><span class="day">' + day + '</span>' + mon + '</span>' +
+        '<h3>' + C.esc(e.title) + '</h3>' +
+        '<p class="event-loc">📍 ' + C.esc(e.location || 'TBA') + ' · ' + C.esc(e.time || 'TBA') + '</p>' +
+        '<p class="desc">' + C.esc(e.description || '') + '</p>' +
+        '<div class="countdown"><div class="cd-box"><b>0</b><span>Days</span></div><div class="cd-box"><b>00</b><span>Hrs</span></div><div class="cd-box"><b>00</b><span>Min</span></div><div class="cd-box"><b>00</b><span>Sec</span></div></div>' +
+        '</div></article>';
+    }).join('');
+    grid.querySelectorAll('.event-card').forEach(function (card) {
+      C.startCountdown(card.querySelector('.countdown'), card.dataset.date, card.dataset.time);
+    });
+    C.bindTilt();
+    C.refreshReveal();
+  }).catch(function () {
+    document.getElementById('events-grid').innerHTML = '<p style="color:var(--muted)">Could not load events. Is the server running?</p>';
+  });
+})();
+</script>
+</body>
+</html>

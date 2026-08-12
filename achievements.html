@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Achievements | Commercium</title>
+<meta name="description" content="Commercium's trophy case — events, workshops, and milestones from the Commerce Club.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css?v=11">
+</head>
+<body>
+<div id="header-slot"></div>
+
+<main>
+  <section class="page-hero t-gold ach-hero">
+    <div class="container">
+      <span class="eyebrow">The trophy case</span>
+      <h1>Our Achievements</h1>
+      <p class="sub">Everything the club has pulled off — events, workshops, and milestones we're proud of.</p>
+    </div>
+  </section>
+
+  <section class="section bg-cream theme-light" style="padding-top:30px">
+    <div class="container">
+      <div class="ach-stats" id="ach-stats"></div>
+      <div class="ach-grid" id="ach-grid"></div>
+      <div class="empty-state" id="empty" style="display:none">
+        <div class="icon">🏆</div>
+        <h2>Nothing here yet</h2>
+        <p>Achievements will appear here as the club racks them up.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="footer-slot"></div>
+<script src="assets/js/data.js?v=5"></script>
+<script src="assets/js/ui.js?v=14"></script>
+<script>
+(function () {
+  'use strict';
+  const C = window.Commercium;
+  C.getData().then(function (data) {
+    const grid = document.getElementById('ach-grid');
+    if (!data.achievements.length) { document.getElementById('empty').style.display = 'block'; return; }
+
+    /* stats strip */
+    const years = {};
+    data.achievements.forEach(function (a) { if (a.year) years[a.year] = 1; });
+    const cats = {};
+    data.achievements.forEach(function (a) { if (a.category) cats[a.category] = 1; });
+    document.getElementById('ach-stats').innerHTML = [
+      [data.achievements.length, 'Milestones'],
+      [Object.keys(cats).length, 'Categories'],
+      [Object.keys(years).length, 'Years active'],
+      [data.gallery.length, 'Photos of it']
+    ].map(function (s) {
+      return '<div class="ach-stat"><b>' + s[0] + '</b><span>' + s[1] + '</span></div>';
+    }).join('');
+
+    grid.innerHTML = data.achievements.map(function (a) {
+      return '<article class="ach-card reveal' + (a.image ? ' has-img' : '') + '">' +
+        '<span class="ach-year">' + C.esc(a.year || '') + '</span>' +
+        (a.image
+          ? '<div class="ach-photo"><img src="' + C.esc(a.image) + '" alt="' + C.esc(a.title) + '" loading="lazy"></div>'
+          : '<div class="ach-icon">' + C.esc(a.icon || '🏆') + '</div>') +
+        '<div class="ach-body">' +
+        '<p class="ach-cat">' + C.esc(a.category || 'Milestone') + '</p>' +
+        '<h3>' + C.esc(a.title) + '</h3>' +
+        '<p>' + C.esc(a.description || '') + '</p>' +
+        '</div>' +
+        '</article>';
+    }).join('');
+    C.bindTilt();
+    C.refreshReveal();
+  }).catch(function () {
+    document.getElementById('ach-grid').innerHTML = '<p style="color:var(--muted)">Could not load achievements. Is the server running?</p>';
+  });
+})();
+</script>
+</body>
+</html>

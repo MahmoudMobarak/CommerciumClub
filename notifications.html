@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Notifications | Commercium</title>
+<meta name="description" content="Official announcements and updates from Commercium.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css?v=11">
+</head>
+<body>
+<div id="header-slot"></div>
+
+<main>
+  <section class="page-hero t-gold">
+    <div class="container">
+      <span class="eyebrow">Official word</span>
+      <h1>Notifications</h1>
+      <p class="sub">Club announcements and updates will appear here.</p>
+    </div>
+  </section>
+
+  <section class="section bg-gold theme-light" style="padding-top:30px">
+    <div class="container">
+      <div class="post-list" id="notice-list"></div>
+      <div class="empty-state" id="empty" style="display:none">
+        <div class="icon">🔔</div>
+        <h2>No announcements yet</h2>
+        <p>Check back soon — when Commercium posts updates, they'll show up right here.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="footer-slot"></div>
+<script src="assets/js/data.js?v=5"></script>
+<script src="assets/js/ui.js?v=14"></script>
+<script>
+(function () {
+  'use strict';
+  const C = window.Commercium;
+  C.getData().then(function (data) {
+    const list = document.getElementById('notice-list');
+    if (!data.announcements.length) { document.getElementById('empty').style.display = 'block'; return; }
+    list.innerHTML = data.announcements.map(function (a) {
+      return '<article class="post-card reveal">' +
+        '<div class="post-head">' +
+        '<span class="post-author">📢 ' + C.esc(a.title) + '</span>' +
+        '<span class="post-date">' + C.formatDate(a.date, true) + '</span>' +
+        '</div>' +
+        (a.image ? '<div class="card-photo"><img src="' + C.esc(a.image) + '" alt="" loading="lazy"></div>' : '') +
+        '<p class="body">' + C.esc(a.body || '') + '</p>' +
+        '</article>';
+    }).join('');
+    C.bindTilt();
+    C.refreshReveal();
+  }).catch(function () {
+    document.getElementById('notice-list').innerHTML = '<p style="color:var(--muted)">Could not load announcements. Is the server running?</p>';
+  });
+})();
+</script>
+</body>
+</html>

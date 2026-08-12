@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin | Commercium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css?v=3">
+<style>
+  body.admin-body { background: #0d0c0a; }
+</style>
+</head>
+<body class="admin-body">
+
+<!-- LOGIN -->
+<div class="login-wrap" id="login-view">
+  <div class="login-card">
+    <div class="lock">🔐</div>
+    <h1>Commercium Admin</h1>
+    <p>Sign in to manage the site</p>
+    <form id="login-form">
+      <div class="field">
+        <label for="lg-user">Username</label>
+        <input type="text" id="lg-user" autocomplete="username" required>
+      </div>
+      <div class="field">
+        <label for="lg-pass">Password</label>
+        <input type="password" id="lg-pass" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%">Sign In</button>
+      <p class="login-error" id="login-error"></p>
+    </form>
+    <p style="margin-top:18px;font-size:12px;color:var(--muted)">
+      <a href="index.html" style="color:var(--gold)">← Back to site</a>
+    </p>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="admin-shell" id="admin-view">
+  <div class="admin-top">
+    <span class="brand">Commercium · Admin</span>
+    <div class="right">
+      <span class="who" id="who"></span>
+      <a class="btn btn-ghost" href="index.html" style="padding:8px 16px;font-size:13px">View site</a>
+      <button class="btn btn-gold" id="logout-btn" style="padding:8px 16px;font-size:13px">Log out</button>
+    </div>
+  </div>
+  <div class="admin-layout">
+    <nav class="admin-nav" id="admin-nav">
+      <button data-panel="overview" class="active">📊 Overview</button>
+      <button data-panel="gallery">🖼️ Gallery</button>
+      <button data-panel="events">🗓️ Events</button>
+      <button data-panel="achievements">🏆 Achievements</button>
+      <button data-panel="posts">💬 Posts</button>
+      <button data-panel="announcements">📢 Announcements</button>
+      <button data-panel="articles">📚 Articles</button>
+      <button data-panel="settings">⚙️ Settings</button>
+    </nav>
+    <main class="admin-main">
+
+      <!-- OVERVIEW -->
+      <section class="admin-panel active" id="panel-overview">
+        <h2>Overview</h2>
+        <p class="hint">Everything you can manage — changes appear on the public site instantly.</p>
+        <div class="stats-grid" id="stats-grid"></div>
+        <h2 style="margin-bottom:4px;margin-top:10px">Site text</h2>
+        <p class="hint">Edit the words on the home page.</p>
+        <div class="admin-form">
+          <div class="row">
+            <div class="field"><label for="s-heroTitle">Hero title</label><input type="text" id="s-heroTitle"></div>
+            <div class="field"><label for="s-heroSubtitle">Hero subtitle</label><input type="text" id="s-heroSubtitle"></div>
+          </div>
+          <div class="field"><label for="s-aboutTitle">About heading</label><input type="text" id="s-aboutTitle"></div>
+          <div class="field"><label for="s-aboutText">About paragraph 1</label><textarea id="s-aboutText" rows="3"></textarea></div>
+          <div class="field"><label for="s-aboutGoal">About paragraph 2</label><textarea id="s-aboutGoal" rows="3"></textarea></div>
+          <div class="row">
+            <div class="field"><label for="s-contactEmail">Contact email</label><input type="text" id="s-contactEmail"></div>
+            <div class="field"><label for="s-instagram">Instagram URL</label><input type="text" id="s-instagram"></div>
+          </div>
+          <button class="btn btn-primary" id="save-site">Save Site Text</button>
+        </div>
+      </section>
+
+      <!-- GALLERY -->
+      <section class="admin-panel" id="panel-gallery">
+        <h2>Gallery</h2>
+        <p class="hint">Photos shown on the home page. Upload new ones or reorder existing.</p>
+        <button class="admin-add" id="gallery-add">＋ Add Photos</button>
+        <input type="file" id="gallery-files" accept="image/*" multiple hidden>
+        <div class="admin-list" id="gallery-list"></div>
+      </section>
+
+      <!-- EVENTS -->
+      <section class="admin-panel" id="panel-events">
+        <h2>Events</h2>
+        <p class="hint">Upcoming events with live countdowns on the Activities page.</p>
+        <button class="admin-add" id="events-add">＋ New Event</button>
+        <div class="admin-list" id="events-list"></div>
+        <div id="events-form"></div>
+      </section>
+
+      <!-- ACHIEVEMENTS -->
+      <section class="admin-panel" id="panel-achievements">
+        <h2>Achievements</h2>
+        <p class="hint">The trophy case shown on the Achievements page.</p>
+        <button class="admin-add" id="achievements-add">＋ New Achievement</button>
+        <div class="admin-list" id="achievements-list"></div>
+        <div id="achievements-form"></div>
+      </section>
+
+      <!-- POSTS -->
+      <section class="admin-panel" id="panel-posts">
+        <h2>Community Posts</h2>
+        <p class="hint">Feed posts shown on the Commerunity page.</p>
+        <button class="admin-add" id="posts-add">＋ New Post</button>
+        <div class="admin-list" id="posts-list"></div>
+        <div id="posts-form"></div>
+      </section>
+
+      <!-- ANNOUNCEMENTS -->
+      <section class="admin-panel" id="panel-announcements">
+        <h2>Announcements</h2>
+        <p class="hint">Official notices shown on the Notifications page.</p>
+        <button class="admin-add" id="announcements-add">＋ New Announcement</button>
+        <div class="admin-list" id="announcements-list"></div>
+        <div id="announcements-form"></div>
+      </section>
+
+      <!-- ARTICLES -->
+      <section class="admin-panel" id="panel-articles">
+        <h2>Commercipedia Articles</h2>
+        <p class="hint">Blog-style articles shown on the Commercipedia page.</p>
+        <button class="admin-add" id="articles-add">＋ New Article</button>
+        <div class="admin-list" id="articles-list"></div>
+        <div id="articles-form"></div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section class="admin-panel" id="panel-settings">
+        <h2>Account</h2>
+        <p class="hint">Change your login credentials.</p>
+        <div class="admin-form">
+          <div class="field"><label for="ac-user">Username</label><input type="text" id="ac-user"></div>
+          <div class="field"><label for="ac-newpass">New password (min 6 characters)</label><input type="password" id="ac-newpass" autocomplete="new-password"></div>
+          <div class="field"><label for="ac-curpass">Current password <span class="req">*</span></label><input type="password" id="ac-curpass" autocomplete="current-password" required></div>
+          <button class="btn btn-primary" id="save-account">Save Credentials</button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script src="assets/js/ui.js?v=3"></script>
+<script src="assets/js/admin.js?v=7"></script>
+</body>
+</html>

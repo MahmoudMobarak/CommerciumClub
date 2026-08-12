@@ -1,0 +1,14 @@
+{
+  "name": "commercium-site",
+  "version": "2.0.0",
+  "description": "Commercium — the Commerce Club at The Westminster School, Dubai. Interactive club site with admin content management.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "license": "MIT"
+}

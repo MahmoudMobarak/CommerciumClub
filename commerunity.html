@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Commerunity | Commercium</title>
+<meta name="description" content="The Commercium community — groups and posts from the Commerce Club.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css?v=11">
+</head>
+<body>
+<div id="header-slot"></div>
+
+<main>
+  <section class="page-hero t-teal">
+    <div class="container">
+      <span class="eyebrow">The community</span>
+      <h1>Commerunity</h1>
+      <p class="sub">View groups and posts below — this is where the Commercium community comes together.</p>
+    </div>
+  </section>
+
+  <section class="section bg-teal theme-light" style="padding-top:20px">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Groups</span>
+        <h2>Find your people</h2>
+      </div>
+      <div class="group-grid">
+        <article class="group-card reveal">
+          <span class="avatar">🎪</span>
+          <div>
+            <h3>Event Volunteers &amp; Organizers</h3>
+            <p class="meta"><span class="badge private">Private</span>1 member</p>
+            <p style="font-size:14px;color:var(--muted)">A space for members who help plan, run, and volunteer at Commercium events.</p>
+          </div>
+        </article>
+        <article class="group-card reveal">
+          <span class="avatar">🌍</span>
+          <div>
+            <h3>Public Community</h3>
+            <p class="meta"><span class="badge public">Public</span>1 member</p>
+            <p style="font-size:14px;color:var(--muted)">The official community space for everyone who wants to be part of Commercium.</p>
+          </div>
+        </article>
+        <article class="group-card reveal">
+          <span class="avatar">🔑</span>
+          <div>
+            <h3>Members Hub</h3>
+            <p class="meta"><span class="badge private">Private</span>1 member</p>
+            <p style="font-size:14px;color:var(--muted)">An exclusive hub for registered Commercium members.</p>
+          </div>
+        </article>
+        <article class="group-card reveal">
+          <span class="avatar">🎓</span>
+          <div>
+            <h3>Alumni Network</h3>
+            <p class="meta"><span class="badge public">Public</span>1 member</p>
+            <p style="font-size:14px;color:var(--muted)">A home for former members and leaders to stay connected.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-cream theme-light" style="padding-top:0">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow">Groups feed</span>
+        <h2>Latest from the community</h2>
+      </div>
+      <div class="post-list" id="post-list"></div>
+      <div class="empty-state" id="empty" style="display:none">
+        <div class="icon">💬</div>
+        <h2>No posts yet</h2>
+        <p>Posts from the community will appear here.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="footer-slot"></div>
+<script src="assets/js/data.js?v=5"></script>
+<script src="assets/js/ui.js?v=14"></script>
+<script>
+(function () {
+  'use strict';
+  const C = window.Commercium;
+  C.getData().then(function (data) {
+    const list = document.getElementById('post-list');
+    if (!data.posts.length) { document.getElementById('empty').style.display = 'block'; return; }
+    list.innerHTML = data.posts.map(function (p) {
+      return '<article class="post-card reveal">' +
+        '<div class="post-head">' +
+        '<span class="post-author">' + C.esc(p.author || 'Commercium Club') + '</span>' +
+        '<span class="post-date">' + C.formatDate(p.date, true) + '</span>' +
+        (p.group ? '<span class="post-group">posted in ' + C.esc(p.group) + '</span>' : '') +
+        '</div>' +
+        (p.image ? '<div class="card-photo"><img src="' + C.esc(p.image) + '" alt="" loading="lazy"></div>' : '') +
+        '<p class="body">' + C.esc(p.body || '') + '</p>' +
+        '<p class="post-views">👁 ' + (p.views || 0) + ' views</p>' +
+        '</article>';
+    }).join('');
+    C.bindTilt();
+    C.refreshReveal();
+  }).catch(function () {
+    document.getElementById('post-list').innerHTML = '<p style="color:var(--muted)">Could not load posts. Is the server running?</p>';
+  });
+})();
+</script>
+</body>
+</html>

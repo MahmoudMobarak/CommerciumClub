@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Commercipedia | Commercium</title>
+<meta name="description" content="Articles and insights from the Commercium community.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css?v=11">
+</head>
+<body>
+<div id="header-slot"></div>
+
+<main>
+  <section class="page-hero t-orange">
+    <div class="container">
+      <span class="eyebrow">The knowledge hub</span>
+      <h1>Commercipedia</h1>
+      <p class="sub">Articles, insights, and knowledge from the Commercium community.</p>
+    </div>
+  </section>
+
+  <section class="section bg-orange-soft theme-light" style="padding-top:30px">
+    <div class="container">
+      <div class="post-list" id="article-list"></div>
+      <div class="empty-state" id="empty" style="display:none">
+        <div class="icon">📚</div>
+        <h2>Check back soon</h2>
+        <p>Once posts are published, you'll see them here.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="footer-slot"></div>
+<script src="assets/js/data.js?v=5"></script>
+<script src="assets/js/ui.js?v=14"></script>
+<script>
+(function () {
+  'use strict';
+  const C = window.Commercium;
+  C.getData().then(function (data) {
+    const list = document.getElementById('article-list');
+    if (!data.articles.length) { document.getElementById('empty').style.display = 'block'; return; }
+    list.innerHTML = data.articles.map(function (a) {
+      return '<article class="post-card reveal">' +
+        '<div class="post-head">' +
+        '<span class="post-author">' + C.esc(a.title) + '</span>' +
+        '<span class="post-date">' + C.esc(a.author || 'Commercium Club') + ' · ' + C.formatDate(a.date, true) + '</span>' +
+        '</div>' +
+        (a.image ? '<div class="card-photo"><img src="' + C.esc(a.image) + '" alt="" loading="lazy"></div>' : '') +
+        '<p class="body">' + C.esc(a.body || '') + '</p>' +
+        '</article>';
+    }).join('');
+    C.bindTilt();
+    C.refreshReveal();
+  }).catch(function () {
+    document.getElementById('article-list').innerHTML = '<p style="color:var(--muted)">Could not load articles. Is the server running?</p>';
+  });
+})();
+</script>
+</body>
+</html>
