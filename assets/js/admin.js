@@ -66,11 +66,135 @@
 
   const el = function (id) { return document.getElementById(id); };
 
+  /* ================================================================
+     DEMO MODE — runs fully in the browser when there's no server
+     (e.g. GitHub Pages). Data lives in localStorage so edits show up
+     on the public pages in the same browser. Not for real deployment.
+     ================================================================ */
+  const DB_KEY = 'commercium-demo-db';
+  const CRED_KEY = 'commercium-demo-cred';
+  const SESSION_KEY = 'commercium-demo-in';
+  let DEMO = false;
+
+  function loadDemoDb() {
+    try {
+      const raw = localStorage.getItem(DB_KEY);
+      if (raw) return JSON.parse(raw);
+    } catch (e) { /* ignore */ }
+    return JSON.parse(JSON.stringify(window.COMMERCIUM_DATA || {
+      site: {}, gallery: [], events: [], posts: [], announcements: [], articles: [], achievements: []
+    }));
+  }
+  function saveDemoDb(db) { try { localStorage.setItem(DB_KEY, JSON.stringify(db)); } catch (e) { C.toast('Storage full — demo edits limited.', 'err'); } }
+  function loadDemoCreds() {
+    try {
+      const raw = localStorage.getItem(CRED_KEY);
+      if (raw) return JSON.parse(raw);
+    } catch (e) { /* ignore */ }
+    return { username: 'admin', password: 'commercium2026' };
+  }
+  function saveDemoCreds(c) { try { localStorage.setItem(CRED_KEY, JSON.stringify(c)); } catch (e) { /* ignore */ } }
+
+  function newId(prefix) { return prefix + '-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+
+  function demoApi(path, opts) {
+    opts = opts || {};
+    const method = (opts.method || 'GET').toUpperCase();
+    const db = loadDemoDb();
+    const loggedIn = sessionStorage.getItem(SESSION_KEY) === '1';
+    return new Promise(function (resolve, reject) {
+      const ok = function (body) { resolve(body || { ok: true }); };
+      const fail = function (msg, code) { const e = new Error(msg || 'Request failed'); e.status = code || 400; reject(e); };
+      setTimeout(function () {
+        /* auth */
+        if (path === '/api/me') return loggedIn ? ok({ username: loadDemoCreds().username }) : fail('Not logged in.', 401);
+        if (path === '/api/login' && method === 'POST') {
+          const c = loadDemoCreds();
+          if (opts.body.username === c.username && opts.body.password === c.password) {
+            sessionStorage.setItem(SESSION_KEY, '1');
+            return ok({ username: c.username });
+          }
+          return fail('Invalid username or password.', 401);
+        }
+        if (path === '/api/logout') { sessionStorage.removeItem(SESSION_KEY); return ok(); }
+        if (!loggedIn) return fail('Not logged in.', 401);
+
+        /* data */
+        if (path === '/api/data') return ok(db);
+        if (path === '/api/admin/site' && method === 'PUT') {
+          db.site = Object.assign({}, db.site, opts.body || {});
+          saveDemoDb(db);
+          return ok();
+        }
+        if (path === '/api/admin/account' && method === 'PUT') {
+          const b = opts.body || {};
+          const c = loadDemoCreds();
+          if (b.currentPassword && b.currentPassword !== c.password) return fail('Current password is incorrect.', 400);
+          c.username = b.username || c.username;
+          if (b.newPassword) c.password = b.newPassword;
+          saveDemoCreds(c);
+          sessionStorage.setItem(SESSION_KEY, '1');
+          return ok({ username: c.username });
+        }
+        if (path === '/api/admin/upload' && method === 'POST') {
+          // keep the image inline (data URL) so the demo works with zero files
+          return ok({ path: (opts.body || {}).dataUrl || '' });
+        }
+
+        /* gallery */
+        let m = path.match(/^\/api\/admin\/gallery\/([^/]+)\/move$/);
+        if (m && method === 'POST') {
+          const arr = db.gallery || (db.gallery = []);
+          const i = arr.findIndex(function (g) { return g.id === m[1]; });
+          if (i < 0) return fail('Not found.', 404);
+          const j = (opts.body || {}).dir === 'up' ? i - 1 : i + 1;
+          if (j >= 0 && j < arr.length) { var t = arr[i]; arr[i] = arr[j]; arr[j] = t; saveDemoDb(db); }
+          return ok();
+        }
+        m = path.match(/^\/api\/admin\/gallery\/([^/]+)$/);
+        if (m) {
+          const arr = db.gallery || (db.gallery = []);
+          const i = arr.findIndex(function (g) { return g.id === m[1]; });
+          if (i < 0) return fail('Not found.', 404);
+          if (method === 'DELETE') { arr.splice(i, 1); saveDemoDb(db); return ok(); }
+          if (method === 'PUT') { Object.assign(arr[i], opts.body || {}); saveDemoDb(db); return ok(); }
+        }
+        if (path === '/api/admin/gallery' && method === 'POST') {
+          (db.gallery = db.gallery || []).push(Object.assign({ id: newId('g') }, opts.body || {}));
+          saveDemoDb(db);
+          return ok();
+        }
+
+        /* generic collections */
+        m = path.match(/^\/api\/admin\/(events|achievements|posts|announcements|articles)(?:\/([^/]+))?$/);
+        if (m) {
+          const coll = m[1], id = m[2];
+          const arr = db[coll] || (db[coll] = []);
+          if (!id && method === 'POST') {
+            arr.push(Object.assign({ id: newId(coll.charAt(0)) }, opts.body || {}));
+            saveDemoDb(db);
+            return ok();
+          }
+          if (id) {
+            const i = arr.findIndex(function (x) { return x.id === id; });
+            if (i < 0) return fail('Not found.', 404);
+            if (method === 'PUT') { Object.assign(arr[i], opts.body || {}); saveDemoDb(db); return ok(); }
+            if (method === 'DELETE') { arr.splice(i, 1); saveDemoDb(db); return ok(); }
+          }
+        }
+        return fail('Unknown admin route.', 404);
+      }, 80);
+    });
+  }
+
   /* ---------- boot ---------- */
   C.api('/api/me').then(function (me) {
     setWho(me.username);
     enterAdmin();
   }).catch(function () {
+    // no server: switch the whole admin to browser demo mode
+    DEMO = true;
+    C.api = demoApi;
     showLogin();
   });
 
@@ -81,6 +205,8 @@
   function enterAdmin() {
     el('login-view').style.display = 'none';
     el('admin-view').classList.add('ready');
+    const badge = el('demo-badge');
+    if (badge) badge.style.display = DEMO ? 'inline-flex' : 'none';
     refresh();
   }
   function setWho(name) { if (name) el('who').textContent = name; }

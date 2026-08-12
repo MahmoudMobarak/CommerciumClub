@@ -261,10 +261,17 @@
   }
 
   /* ---------- data with offline fallback ---------- */
+  const DEMO_DB_KEY = 'commercium-demo-db';
   async function getData() {
     try {
       return await api('/api/data');
     } catch (e) {
+      // no server (e.g. GitHub Pages): prefer this browser's demo edits,
+      // then the embedded snapshot
+      try {
+        const raw = localStorage.getItem(DEMO_DB_KEY);
+        if (raw) return JSON.parse(raw);
+      } catch (err) { /* ignore */ }
       if (window.COMMERCIUM_DATA) return window.COMMERCIUM_DATA;
       throw e;
     }
